@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import MovieList from './MovieListView.js'
+import AddMovie from './AddMovieView.js'
 import Search from './SearchView.js'
+import MovieList from './MovieListView.js'
 
 class App extends Component {
   constructor() {
@@ -14,8 +14,12 @@ class App extends Component {
                 {title: 'Sunshine'},
                 {title: 'Ex Machina'} ]
     }
-
+    this.onAdd = this.onAdd.bind(this);
     this.onSearch = this.onSearch.bind(this);
+  }
+
+  onAdd(title) {
+    this.setState({movies: [...this.state.movies, title]})
   }
 
   onSearch(term) {
@@ -28,6 +32,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <AddMovie onAdd={this.onAdd} />
         <Search onSearch={this.onSearch} />
         <MovieList movies={this.state.movies} />
       </div>

@@ -25,6 +25,7 @@ class Search extends Component {
       <div>
         <form onSubmit={this.handleSearch}>
           <input type="text" value={this.state.term} onChange={this.handleChange} />
+          <button>Search</button>
         </form>
 
       </div>
