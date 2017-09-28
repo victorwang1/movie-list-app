@@ -12,12 +12,13 @@ class Search extends Component {
   }
 
   handleSearch(event) {
-    event.preventDefault();
+    if (event) event.preventDefault();
     this.props.onSearch(this.state.term);
   }
 
   handleChange(event) {
-    this.setState({term: event.target.value})
+    if (event.target.value === '') this.props.showAll();
+    this.setState({term: event.target.value}, () => { this.handleSearch() });
   }
 
   render() {

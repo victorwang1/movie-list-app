@@ -3,37 +3,47 @@ import './App.css';
 import AddMovie from './AddMovieView.js'
 import Search from './SearchView.js'
 import MovieList from './MovieListView.js'
+import Watched from './WatchedView.js'
 
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      movies: [ {title: 'Mean Girls'},
-                {title: 'Hackers'},
-                {title: 'The Grey'},
-                {title: 'Sunshine'},
-                {title: 'Ex Machina'} ]
-    }
+    this.data = [ {title: 'Mean Girls', watched: true},
+                  {title: 'Hackers', watched: true},
+                  {title: 'The Grey', watched: true},
+                  {title: 'Sunshine', watched: true},
+                  {title: 'Ex Machina', watched: true} ];
+    this.state = {movies: this.data.slice()};
+
     this.onAdd = this.onAdd.bind(this);
     this.onSearch = this.onSearch.bind(this);
+    this.showAll = this.showAll.bind(this);
+    this.showWatched = this.showWatched.bind(this);
   }
 
   onAdd(title) {
-    this.setState({movies: [...this.state.movies, title]})
+    this.data.push(title);
+    this.setState({movies: this.data.slice()});
   }
 
   onSearch(term) {
-    var result = this.state.movies.filter((movie) => {
-      return movie.title.includes(term);
-    })
-    this.setState({movies: result});
+    this.setState({movies: this.state.movies.filter(movie => movie.title.includes(term))});
+  }
+
+  showAll() {
+    this.setState({movies: this.data.slice()})
+  }
+
+  showWatched(watched = true) {
+    this.setState({movies: this.data.filter(movie => movie.watched === watched)});
   }
 
   render() {
     return (
       <div>
         <AddMovie onAdd={this.onAdd} />
-        <Search onSearch={this.onSearch} />
+        <Watched showWatched={this.showWatched} />
+        <Search onSearch={this.onSearch} showAll={this.showAll} />
         <MovieList movies={this.state.movies} />
       </div>
     );

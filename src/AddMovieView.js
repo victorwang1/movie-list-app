@@ -13,7 +13,7 @@ class AddMovie extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.onAdd({title: this.state.movieTitle});
+    this.props.onAdd({title: this.state.movieTitle, watched: false});
     this.setState({movieTitle: ''});
   }
 
@@ -26,7 +26,7 @@ class AddMovie extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <input type="text" value={this.state.movieTitle} onChange={this.handleChange} />
-          <button>Add</button>
+          <button style={{'backgroundColor': 'green'}}>Add</button>
         </form>
       </div>
     )
