@@ -19,6 +19,7 @@ class App extends Component {
     this.onSearch = this.onSearch.bind(this);
     this.showAll = this.showAll.bind(this);
     this.showWatched = this.showWatched.bind(this);
+    this.toggleWatched = this.toggleWatched.bind(this);
   }
 
   onAdd(title) {
@@ -38,13 +39,19 @@ class App extends Component {
     this.setState({movies: this.data.filter(movie => movie.watched === watched)});
   }
 
+  toggleWatched(index) {
+    var movies = this.state.movies.slice();
+    movies[index].watched = !movies[index].watched;
+    this.setState({movies: movies});
+  }
+
   render() {
     return (
       <div>
         <AddMovie onAdd={this.onAdd} />
         <Watched showWatched={this.showWatched} />
         <Search onSearch={this.onSearch} showAll={this.showAll} />
-        <MovieList movies={this.state.movies} />
+        <MovieList movies={this.state.movies} toggleWatched={this.toggleWatched} />
       </div>
     );
   }

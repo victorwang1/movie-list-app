@@ -7,6 +7,8 @@ class Watched extends Component {
       watchedColor: 'white',
       toWatchColor: 'white'
     }
+    this.handleWatchedClick = this.handleWatchedClick.bind(this);
+    this.handleToWatchClick = this.handleToWatchClick.bind(this);
   }
 
   handleWatchedClick() {
@@ -25,9 +27,9 @@ class Watched extends Component {
     return (
       <div>
         <button style={{'backgroundColor': this.state.watchedColor}}
-              onClick={this.handleWatchedClick.bind(this)}>Watched</button>
+              onClick={this.handleWatchedClick}>Watched</button>
         <button style={{'backgroundColor': this.state.toWatchColor}}
-              onClick={this.handleToWatchClick.bind(this)}>To Watch</button>
+              onClick={this.handleToWatchClick}>To Watch</button>
       </div>
     )
   }
